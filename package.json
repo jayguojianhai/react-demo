@@ -1,0 +1,42 @@
+{
+  "name": "antd-demo",
+  "version": "1.0.0",
+  "entry": {
+    "index": "./src/entry/index.jsx"
+  },
+  "dependencies": {
+    "antd": "^0.12.4",
+    "antd-build": "0.4.x",
+    "react": "0.14.5",
+    "react-dom": "0.14.5",
+    "superagent": "~1.4.0",
+    "react-router": "1.0.0"
+  },
+  "devDependencies": {
+    "@alipay/ajax": "~2.5.0",
+    "antd-bin": "0.10.x",
+    "babel-eslint": "~4.0.5",
+    "console-polyfill": "^0.2.2",
+    "deep-equal": "^1.0.1",
+    "dora": "~0.3.2",
+    "dora-plugin-proxy": "~0.6.1",
+    "eslint": "~1.6.0",
+    "eslint-config-airbnb": "~0.1.0",
+    "eslint-plugin-react": "~3.5.1",
+    "expect.js": "~0.3.1",
+    "history": "^1.17.0",
+    "jquery": "^2.2.3",
+    "pre-commit": "1.x",
+    "reqwest-without-xhr2": "^2.0.2"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "antd server dora --port 8005",
+    "test": "antd test",
+    "lint": "eslint --ext .js,.jsx src",
+    "build": "rm -rf dist && antd-build && mkdir -p dist/${npm_package_name}/${npm_package_version} && mv dist/*.* dist/${npm_package_name}/${npm_package_version}/"
+  }
+}

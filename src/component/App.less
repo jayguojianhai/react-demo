@@ -1,0 +1,100 @@
+html {
+    min-height: 100%;
+}
+body {
+    min-height: 100%;
+
+    background-color: #f2f2f2;
+}
+#content {
+    min-height: 100%;
+}
+#left-bar {
+    position: fixed;
+    top: 85px;
+    left: 0;
+
+    width: 200px;
+    min-height: 100%;
+
+    background: #404040;
+}
+#right-bar {
+    width: 100%;
+    min-height: 500px;
+    padding: 15px 0 0 220px;
+
+    background: #fff;
+}
+#toolbar {
+    margin: 15px 0;
+
+    text-align: left;
+    button {
+        margin-left: 10px;
+    }
+}
+.ellipsis {
+    display: block;
+    width: 160px;
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ant-form-item {
+    margin-bottom: 10px;
+}
+@font-face {
+    font-family: "iconfont";
+
+    src: url("./iconfont.eot"); /* IE9*/
+    src: url("./iconfont.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("./iconfont.woff") format("woff"), /* chrome, firefox */
+    url("./iconfont.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url("./iconfont.svg#iconfont") format("svg"); /* iOS 4.1- */
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+
+    -webkit-text-stroke-width: .2px;
+}
+.icon-zhuye:before {
+    content: "\e6c1";
+}
+.icon-caidan:before {
+    content: "\e602";
+}
+.icon-shuxian:before {
+    content: "\e62b";
+}
+.icon-yonghu:before {
+    content: "\e60e";
+}
+.icon-iconshizhong0101:before {
+    font-size: 20px;
+
+    content: "\e689";
+}
+
+.text-center {
+    text-align: center;
+    button {
+        margin: 0 5px;
+    }
+}
+#footer {
+    height: 100px;
+
+    background: url(../images/logo-gray.jpg) no-repeat center center;
+}
+
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow {
+    top: 0 \9;
+    left: 16px \9;
+}

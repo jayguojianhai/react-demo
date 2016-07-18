@@ -1,88 +1,84 @@
 import React from 'react';
-import ajax from '@alipay/ajax';
-import CONFIG from '../../config/config';
-import {Table,Button,message,Popconfirm} from 'antd';
-import Header from '../Header';
-import MenuBar from '../MenuBar';
-import QueryBar from '../QueryBar';
-import Footer from '../Footer';
-import '../App.less';
+import {Table,Button,Popconfirm,Modal,message,Input} from 'antd';
+import COMMON from '../../common/common';
+import QueryBar from './QueryBar';
 const App_list = React.createClass({
   getInitialState() {
-    ajax({
-        url: CONFIG.GETDATAS,
-        success: function(data) {
-          if(data.state==="success"){
-            this.setState({data:data.data,loading:false});
-          }
-        }.bind(this),
-        error: function(str) {
-          message.error("error");
-          this.setState({loading:false});
-        }
-    });
     return {
-      loading:true,
+      searchItems:this.props.searchItems,// 这里配置搜索条内容
+      toolbar:this.props.toolbar,
+      loading:false,
       selectedRowKeys: [],  // 这里配置默认勾选列
-      data:[]
+      data:[],
+      columns:[],
+      url:this.props.url
     };
   },
+  componentDidMount(){
+    this.getData({});
+  },
   onSelectChange(selectedRowKeys) {
-    //console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+    this.setState({selectedRowKeys});
+  },
+  getData(obj){
+    this.setState({loading:true});
+    let url=this.state.url;
+    COMMON.ajax(url,obj,(d)=>{
+      if(d.statu){
+        let {columns,toolbar}=this.state;
+        if(toolbar){
+          let tool={
+            "title": "操作",
+            "dataIndex": "operation",
+            "render":(text,record)=>{
+              return (
+                <span className='tableList-toolbar-aBtn'>
+                  {
+                    'edit' in toolbar?(<a key={record.orderId} href={"#/Edit/"+record.orderId}>编辑</a>):null
+                  }
+                  {
+                    'delete' in toolbar?(
+                      <Popconfirm title="确定删除吗？" onConfirm={this.handleDelete.bind(this,record.key)}>
+                          <a key={record.orderId} href="javascript:;">删除</a>
+                      </Popconfirm>
+                    ):null
+                  }
+                </span>
+              )
+            }
+          }
+          d.columns.push(tool);
+        };
+        this.setState({data:d.data,columns:d.columns,loading:false});
+      }else{
+        Modal.error({
+          title:'提示',
+          content: d.message
+        });
+        this.setState({loading:false});
+      }
+    },()=>{
+      message.error("error");
+      this.setState({loading:false});
+    });
   },
   handleNew(){
     location.href="#/Edit";
   },
-  handleDelete(){
-    alert('删除成功');
+  handleDelete(key){
+    let data=this.props.getStoreState().data;
+    let selectedRowKeys=key?[key]:this.state.selectedRowKeys;
+    selectedRowKeys.map((s,i)=>{//提交后台删除数据 完了重新请求数据
+      data.map((o,j)=>{
+        if(s===o.key){
+          data.splice(j,1);
+        }
+      })
+    })
+    this.props.setStoreState({data:Object.assign([], this.props.data, data)});
   },
   render() {
-    const columns = [{
-        title: '交易ID',
-        dataIndex: 'orderId',
-        key:'orderId'
-      },{
-        title: '交易时间',
-        dataIndex: 'time',
-        key: 'time'
-      }, {
-        title: '交易类型',
-        dataIndex: 'type',
-        key:'type',
-        filters: [{
-          text: '赚钱交易',
-          value: '赚',
-        }, {
-          text: '赔钱交易',
-          value: '赔',
-        }],
-        // 指定确定筛选的条件函数
-        // 这里是名字中第一个字是 value
-        onFilter: (value, record) => {
-          return record.type.indexOf(value) === 0;
-        }
-      }, {
-        title: '交易金额',
-        dataIndex: 'money',
-        key:'money'
-      },{
-        title: '操作',
-        dataIndex: 'remind',
-        key:'remind',
-        render:(text, record)=> {
-          return (
-            <span>
-              <a href={"#/Edit/"+record.orderId}>编辑{record.name}</a>
-              <span className="ant-divider"></span>
-              <Popconfirm title="确定删除吗？" onConfirm={this.handleDelete.bind(this,"btn-delete")}>
-                <a href="javascript:;">删除</a>
-              </Popconfirm>
-            </span>
-          );
-        }
-      }];
-    const data = this.state.data;
+    let {columns,data}=this.state;
     const pagination = {
       total: data.length,
       showSizeChanger: true,
@@ -93,31 +89,27 @@ const App_list = React.createClass({
         console.log('Current: ', current);
       }
     };
-    const { loading, selectedRowKeys } = this.state;
+    const {loading,selectedRowKeys} = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
     const hasSelected = selectedRowKeys.length > 0;
+    const searchItems=this.state.searchItems?this.state.searchItems:undefined;
     return (
-    	<div id="wrap">
-          <Header />
-          <div id="content">
-            <div id="left-bar">
-              <MenuBar />
-            </div>
-            <div id="right-bar">
-              <QueryBar />
-              <div id="toolbar">
-                <Button className="btn-new" type="primary" onClick={this.handleNew}>新建</Button>
-                <Popconfirm title="确定删除吗？" onConfirm={this.handleDelete.bind(this,"btn-delete")}>
-                  <Button>删除</Button>
-                </Popconfirm>
-              </div>
-              <Table rowSelection={rowSelection} columns={columns} dataSource={data} bordered loading={this.state.loading} pagination={pagination} />
-            </div>
-          </div>
-          <Footer />
+    	<div>
+        {
+          searchItems?(
+            <QueryBar searchItems={searchItems} getData={this.getData} />
+          ):null
+        }
+        <div id="toolbar">
+          <Button type="primary" onClick={this.handleNew}>新建</Button>
+          <Popconfirm title="确定删除吗？" onConfirm={this.handleDelete}>
+            <Button>删除</Button>
+          </Popconfirm>
+        </div>
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} bordered loading={this.state.loading} pagination={pagination} />
     	</div>
     );
   }

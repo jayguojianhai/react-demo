@@ -1,0 +1,94 @@
+export default {
+ 	searchItems:{//搜索条配置
+      "submitUrl":"www.baidu.com",//点击搜索按钮时提交地址
+      "items":[{
+        "key":"name",//搜索字段名
+        "name":"关键词搜索",//搜索名称
+        "htmlType":"input",//搜索框类型 包括input password date select radio checkbox 等同于html标签用法
+        "valids":{//搜索项验证内容
+          "validType":"string",//验证类型 string==字符串 number==数字 date==时间对象 arror==数组 等同于js数据类型
+          "required":true,//是否必填 true==必填 false==可不填
+          "max":10,//最大长度
+          "min":1//最小长度
+        }
+      },{
+        "key":"startTime",
+        "name":"开始时间",
+        "htmlType":"date",
+        "valids":{
+          "validType":"date",
+          "required":true
+        }
+      },{
+        "key":"endTime",
+        "name":"结束时间",
+        "htmlType":"date",
+        "valids":{
+          "validType":"date",
+          "required":false
+        }
+      },{
+        "key":"type",
+        "name":"状态",
+        "htmlType":"select",
+        "options":[{ //当htmlType为select时 需要传入options
+          "value":"huabei",
+          "name":"花呗"
+        },{
+          "value":"jiebei",
+          "name":"借呗"
+        }],
+        "valids":{
+          "required":false
+        }
+      }
+    ]},
+    demoForm:{
+      "submitUrl":"www.baidu.com",//点击提交按钮时提交地址
+      "items":[{
+        "key":"applyID",//字段名
+        "name":"支付宝ID",//名称
+        "htmlType":"input",//类型 包括input password date select radio checkbox 等同于html标签用法
+        "valids":{//项验证内容
+          "validType":"string",//验证类型 string==字符串 number==数字 date==时间对象 arror==数组 email==邮箱 等同于js数据类型
+          "required":true,//是否必填 true==必填 false==可不填
+          "max":10,//最大长度
+          "min":1//最小长度
+        }
+      },{
+        "key":"username",
+        "name":"姓名",
+        "htmlType":"input",
+        "valids":{
+          "validType":"string",
+          "required":true,
+          "max":10,
+          "min":1
+        }
+      },{
+        "key":"tel",
+        "name":"手机号码",
+        "htmlType":"input",
+        "valids":{
+          "validType":"tel",
+          "required":true,
+        }
+      },{
+        "key":"emial",
+        "name":"邮箱",
+        "htmlType":"input",
+        "valids":{
+          "validType":"email",
+          "required":true,
+        }
+      },{
+        "key":"birthday",
+        "name":"生日",
+        "htmlType":"date",
+        "valids":{
+          "validType":"date",
+          "required":true
+        }
+      }]
+    }
+ }

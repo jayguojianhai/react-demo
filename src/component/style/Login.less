@@ -1,0 +1,117 @@
+body {
+    min-height: 100%;
+
+    text-align: center;
+
+    background-color: #fff;
+}
+#header {
+    width: 1000px;
+    height: 70px;
+    padding: 20px 0;
+    margin: 0 auto;
+
+    line-height: 30px;
+
+    background: #fff;
+    .logo {
+        float: left;
+        width: 244px;
+        height: 30px;
+
+        background: url(../../images/logo.jpg);
+    }
+}
+#content {
+    height: 530px;
+
+    background: url(../../images/login-bg.jpg);
+}
+#login-box {
+    position: relative;
+
+    width: 1000px;
+    margin: 0 auto;
+}
+#login-left {
+    position: absolute;
+    top: 111px;
+    left: 30px;
+
+    width: 397px;
+    height: 294px;
+
+    border: 8px solid #2484c6;
+}
+#login-split {
+    position: absolute;
+    top: 70px;
+    left: 490px;
+
+    width: 1px;
+    height: 423px;
+
+    background: url(../../images/login-icon.png) no-repeat 0 0;
+
+}
+#login-right {
+    position: absolute;
+    top: 50px;
+    right: 31px;
+
+    width: 410px;
+    height: 431px;
+
+    text-align: left;
+
+    background-color: #fff;
+    dt {
+        height: 59px;
+        padding: 0 30px;
+
+        font-size: 20px;
+        line-height: 59px;
+
+        color: 666;
+        border-bottom: 1px solid #c0c0c0;
+    }
+    dd {
+        padding: 10px 30px;
+    }
+    .btn-login {
+        width: 100%;
+        height: 40px;
+        margin-top: 30px;
+
+        font-size: 16px;
+    }
+    .ant-form-item-control {
+        margin-top: 20px;
+    }
+    .ant-input {
+        height: 40px;
+
+        line-height: 40px;
+    }
+
+    .ant-form-explain {
+        position: absolute;
+
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+#footer {
+    line-height: 100px;
+
+    color: #7f7f7f;
+    background: none;
+}
+.has-success.has-feedback:after,
+.has-warning.has-feedback:after,
+.has-error.has-feedback:after,
+.is-validating.has-feedback:after {
+    height: 40px;
+
+    line-height: 40px;
+}

@@ -2,9 +2,11 @@
   "name": "antd-demo",
   "version": "1.0.0",
   "entry": {
-    "index": "./src/entry/index.jsx"
+    "index": "./src/entry/index.jsx",
+    "login": "./src/entry/login.jsx"
   },
   "dependencies": {
+    "@alipay/roof": "0.5.x",
     "antd": "^0.12.4",
     "antd-build": "0.4.x",
     "react": "0.14.5",

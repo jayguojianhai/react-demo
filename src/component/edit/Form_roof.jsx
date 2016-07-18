@@ -8,15 +8,12 @@ import COMMON from '../../common/common';
 let FormEdit =React.createClass({
   getInitialState() {
     return {
-      data:this.props.data,
       demoForm:this.props.demoForm,
-      loading:false
+      loading:this.props.loading
     };
   },
   componentWillReceiveProps(props){
       this.setState({
-        data:props.data,
-        demoForm:props.demoForm,
         loading:props.loading
       });
   },
@@ -69,7 +66,7 @@ let FormEdit =React.createClass({
       labelCol: { span: 2 },
       wrapperCol: { span: 6 },
     };
-    let data = this.state.data;
+    let data = this.props.data;
     let formItems=this.state.demoForm.items;
     let formItemList=[];
     formItems.map((item)=>{
@@ -106,7 +103,7 @@ let FormEdit =React.createClass({
             })
           }
           oneItem=<FormItem key={item.key} {...formItemLayout} label={item.name+"："}>
-            <Input {...inputProps} />
+            <Input name={item.key} {...inputProps} />
           </FormItem>;
           break;
         case "select":
@@ -159,5 +156,13 @@ let FormEdit =React.createClass({
     );
   }
 })
-FormEdit = createForm()(FormEdit);
-export default FormEdit;
+// FormEdit = createForm()(FormEdit);
+// export default FormEdit;
+export default createForm({
+  mapPropsToFields(props) {
+    return props.data;
+  },
+  onFieldsChange(props, fields) {
+    props.userActions.updateUserForm(fields);
+  },
+})(FormEdit);

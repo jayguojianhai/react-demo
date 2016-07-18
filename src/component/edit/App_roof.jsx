@@ -1,8 +1,9 @@
 import React from 'react';
 import {Table,Button} from 'antd';
+import { createActionContainer } from '@alipay/roof';
 import CONFIG from '../../config/config';
 import COMMON from '../../common/common';
-import FormEdit from './Form';
+import FormEdit from './Form_roof';
 import * as userActions from '../../actions/user';
 const App = React.createClass({
   getInitialState() {
@@ -14,16 +15,14 @@ const App = React.createClass({
     };
   },
   componentDidMount(){
-    if(this.props.orderId){
-      this.getData({orderId:this.props.orderId});
-    }
+    this.getData({orderId:this.props.orderId});
   },
   getData(obj){
     let url=this.state.url;
     let that=this;
     COMMON.ajax(url,obj,(d)=>{
       if(d.statu){
-        that.setState({data:d.data});
+        this.props.setStoreState({data:d.data});
       }else{
         Modal.error({
           title:'提示',
@@ -33,7 +32,7 @@ const App = React.createClass({
     });
   },
   handleSubmit(values) {
-    let url=this.state.data.submitUrl;
+    let url=this.props.getStoreState().data.submitUrl;
     COMMON.ajax(url,values,(d)=>{
       if(d.statu){
         message.success("提交成功");
@@ -51,8 +50,12 @@ const App = React.createClass({
   },
   render() {
     return (
-      <FormEdit {...this.state} handleSubmit={this.handleSubmit} />
+      <FormEdit {...this.props} loading={this.state.loading} handleSubmit={this.handleSubmit} />
     );
   }
 });
-export default App;
+export default createActionContainer({
+  data: 'data',
+}, {
+  userActions,
+})(App);

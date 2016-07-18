@@ -1,26 +1,31 @@
-{"state":"success","data":[{
+{"statu":true,"data":[{
     "key": "1",
     "title": "项目任务管理",
     "items": [
       {
         "key":"11",
-        "title":"任务发布"
+        "title":"任务发布",
+        "href":"task"
       },
       {
         "key":"12",
-        "title":"查看任务"
+        "title":"查看任务",
+        "href":"task"
       },
       {
         "key":"13",
-        "title":"指定验收"
+        "title":"指定验收",
+        "href":"task"
       },
       {
         "key":"14",
-        "title":"指定测试"
+        "title":"指定测试",
+        "href":"task"
       },
       {
         "key":"15",
-        "title":"日报管理"
+        "title":"日报管理",
+        "href":"task"
       }
     ]
   }, {
@@ -29,23 +34,28 @@
     "items": [
       {
         "key":"21",
-        "title":"员工工时查询"
+        "title":"员工工时查询",
+        "href":"task"
       },
       {
         "key":"22",
-        "title":"月度全员工时"
+        "title":"月度全员工时",
+        "href":"task"
       },
       {
         "key":"23",
-        "title":"上月运营汇总"
+        "title":"上月运营汇总",
+        "href":"task"
       },
       {
         "key":"24",
-        "title":"项目收款查询"
+        "title":"项目收款查询",
+        "href":"task"
       },
       {
         "key":"25",
-        "title":"当月报销费用汇总"
+        "title":"当月报销费用汇总",
+        "href":"task"
       }
     ]
   },{

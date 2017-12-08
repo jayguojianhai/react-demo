@@ -1,6 +1,6 @@
 {
   "name": "antd-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "entry": {
     "index": "./src/entry/index.jsx",
     "login": "./src/entry/login.jsx"

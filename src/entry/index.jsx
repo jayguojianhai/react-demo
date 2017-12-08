@@ -8,6 +8,7 @@ import Task from '../component/task/App';
 import App_edit from '../component/task/Edit';
 import PassWord from '../component/password/App';
 import Roof from '../component/roof/Edit';
+// dev2分支修改
 const rootRoute = {
     component: App,
     childRoutes: [//路由配置
